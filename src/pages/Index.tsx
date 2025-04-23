@@ -2,11 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { SurveyComplete } from "@/components/SurveyComplete";
 
@@ -15,8 +13,6 @@ const formSchema = z.object({
   email: z.string().email({ message: "Введите корректный email" }),
   age: z.string().min(1, { message: "Укажите возраст" }),
   gender: z.enum(["male", "female", "other"], { message: "Выберите пол" }),
-  education: z.string({ required_error: "Выберите уровень образования" }),
-  feedback: z.string().min(10, { message: "Отзыв должен содержать минимум 10 символов" }).max(500, { message: "Отзыв не должен превышать 500 символов" }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -30,7 +26,6 @@ const Index = () => {
       fullName: "",
       email: "",
       age: "",
-      feedback: "",
     },
   });
 
@@ -46,14 +41,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-medium text-foreground">Анкета участника исследования</h1>
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-medium text-foreground">Анкета участника</h1>
           <p className="mt-2 text-sm text-muted-foreground">Все поля обязательны для заполнения</p>
         </div>
         
-        <div className="bg-card p-6 sm:p-8 border border-border rounded shadow-sm">
+        <div className="bg-card p-5 border border-border rounded shadow-sm">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="fullName"
@@ -68,7 +63,7 @@ const Index = () => {
                 )}
               />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="email"
@@ -130,52 +125,6 @@ const Index = () => {
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage className="text-xs" />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="education"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">Образование</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger className="text-sm">
-                          <SelectValue placeholder="Выберите уровень образования" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="school">Среднее</SelectItem>
-                        <SelectItem value="college">Среднее профессиональное</SelectItem>
-                        <SelectItem value="bachelor">Высшее (бакалавр)</SelectItem>
-                        <SelectItem value="master">Высшее (магистр)</SelectItem>
-                        <SelectItem value="phd">Высшее (аспирантура/докторантура)</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage className="text-xs" />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="feedback"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm font-medium">Дополнительная информация</FormLabel>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Опишите ваш опыт и квалификацию"
-                        className="resize-none h-24 text-sm"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormDescription className="text-xs">
-                      Минимум 10 символов, максимум 500
-                    </FormDescription>
                     <FormMessage className="text-xs" />
                   </FormItem>
                 )}
