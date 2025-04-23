@@ -44,41 +44,41 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Анкета участника</h1>
-          <p className="text-lg text-gray-600">Пожалуйста, заполните все поля анкеты</p>
+    <div className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-medium text-foreground">Анкета участника исследования</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Все поля обязательны для заполнения</p>
         </div>
         
-        <div className="bg-white p-8 rounded-xl shadow-lg">
+        <div className="bg-card p-6 sm:p-8 border border-border rounded shadow-sm">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
               <FormField
                 control={form.control}
                 name="fullName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>ФИО</FormLabel>
+                    <FormLabel className="text-sm font-medium">ФИО</FormLabel>
                     <FormControl>
-                      <Input placeholder="Введите ваше полное имя" {...field} />
+                      <Input placeholder="Иванов Иван Иванович" {...field} />
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <FormField
                   control={form.control}
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Email</FormLabel>
+                      <FormLabel className="text-sm font-medium">Email</FormLabel>
                       <FormControl>
                         <Input type="email" placeholder="email@example.com" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
@@ -88,11 +88,11 @@ const Index = () => {
                   name="age"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Возраст</FormLabel>
+                      <FormLabel className="text-sm font-medium">Возраст</FormLabel>
                       <FormControl>
                         <Input type="number" {...field} />
                       </FormControl>
-                      <FormMessage />
+                      <FormMessage className="text-xs" />
                     </FormItem>
                   )}
                 />
@@ -102,8 +102,8 @@ const Index = () => {
                 control={form.control}
                 name="gender"
                 render={({ field }) => (
-                  <FormItem className="space-y-3">
-                    <FormLabel>Пол</FormLabel>
+                  <FormItem className="space-y-2">
+                    <FormLabel className="text-sm font-medium">Пол</FormLabel>
                     <FormControl>
                       <RadioGroup
                         onValueChange={field.onChange}
@@ -114,23 +114,23 @@ const Index = () => {
                           <FormControl>
                             <RadioGroupItem value="male" />
                           </FormControl>
-                          <FormLabel className="font-normal">Мужской</FormLabel>
+                          <FormLabel className="font-normal text-sm">Мужской</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-2 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="female" />
                           </FormControl>
-                          <FormLabel className="font-normal">Женский</FormLabel>
+                          <FormLabel className="font-normal text-sm">Женский</FormLabel>
                         </FormItem>
                         <FormItem className="flex items-center space-x-2 space-y-0">
                           <FormControl>
                             <RadioGroupItem value="other" />
                           </FormControl>
-                          <FormLabel className="font-normal">Другой</FormLabel>
+                          <FormLabel className="font-normal text-sm">Другой</FormLabel>
                         </FormItem>
                       </RadioGroup>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -140,10 +140,10 @@ const Index = () => {
                 name="education"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Образование</FormLabel>
+                    <FormLabel className="text-sm font-medium">Образование</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="text-sm">
                           <SelectValue placeholder="Выберите уровень образования" />
                         </SelectTrigger>
                       </FormControl>
@@ -155,7 +155,7 @@ const Index = () => {
                         <SelectItem value="phd">Высшее (аспирантура/докторантура)</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
@@ -165,25 +165,27 @@ const Index = () => {
                 name="feedback"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Дополнительная информация</FormLabel>
+                    <FormLabel className="text-sm font-medium">Дополнительная информация</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="Расскажите о себе и ваших интересах"
-                        className="resize-none h-32"
+                        placeholder="Опишите ваш опыт и квалификацию"
+                        className="resize-none h-24 text-sm"
                         {...field}
                       />
                     </FormControl>
-                    <FormDescription>
-                      Ваш отзыв поможет нам лучше узнать вас
+                    <FormDescription className="text-xs">
+                      Минимум 10 символов, максимум 500
                     </FormDescription>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </FormItem>
                 )}
               />
               
-              <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-                Отправить анкету
-              </Button>
+              <div className="pt-2">
+                <Button type="submit" className="w-full">
+                  Отправить
+                </Button>
+              </div>
             </form>
           </Form>
         </div>

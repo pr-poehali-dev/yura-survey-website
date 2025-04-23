@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 
 export const SurveyComplete = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-purple-50 to-white py-12 px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-xl shadow-lg text-center">
-        <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
-          <CheckCircle className="h-12 w-12 text-green-600" />
+    <div className="min-h-screen flex items-center justify-center bg-background py-8 px-4">
+      <div className="max-w-md w-full bg-card p-6 sm:p-8 border border-border rounded shadow-sm text-center">
+        <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-muted mb-6">
+          <CheckCircle className="h-8 w-8 text-primary" />
         </div>
         
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Спасибо!</h2>
-        <p className="text-lg text-gray-600 mb-8">
-          Ваша анкета успешно отправлена. Мы свяжемся с вами в ближайшее время.
+        <h2 className="text-xl font-medium text-foreground mb-2">Форма отправлена</h2>
+        <p className="text-sm text-muted-foreground mb-6">
+          Благодарим за заполнение анкеты. Ваши данные получены и зарегистрированы в системе.
         </p>
         
         <Link to="/">
-          <Button className="w-full bg-purple-600 hover:bg-purple-700">
+          <Button variant="outline" className="w-full">
             Вернуться на главную
           </Button>
         </Link>
